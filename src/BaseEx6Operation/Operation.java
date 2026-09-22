@@ -22,10 +22,12 @@ public class Operation {
     }
 
     public static int div(int a, int b) {
-        if (b == 0) {
-          System.out.println("Division par zéro impossible");
-          return 0;
-        }
-        return a / b;
+    	try {
+    		return a/b;
+    	}catch (ArithmeticException exception) {
+    		System.err.println("Division impossible : " + exception.getMessage());
+    		return 0;
+    	}
+        
     }
 }
