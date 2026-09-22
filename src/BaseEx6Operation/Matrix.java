@@ -44,12 +44,20 @@ public class Matrix {
 		 printMatrix(fourthMatrix);
 		 	System.out.println("*");
 		 	System.out.println(i);
-		    for (int y = 0; y < fourthMatrix.length; y++) {
-		        for (int x = 0; x < fourthMatrix[y].length; x++) {
-		            resultat[y][x] =
-		            		fourthMatrix[y][x] * i;
-		        }
-		    }
+		 	try {
+			    for (int y = 0; y < fourthMatrix.length; y++) {
+			    	try {
+				        for (int x = 0; x < fourthMatrix[y].length; x++) {
+				            resultat[y][x] =
+				            		fourthMatrix[y][x] * i;
+				        }
+			    	}catch (ArrayIndexOutOfBoundsException e) {
+			    		System.err.println("Indice x invalide " + e.getMessage());
+			    	}
+		    	}
+		 	}catch(ArrayIndexOutOfBoundsException exception) {
+		 		System.err.println("Indice y invalid : " + exception.getMessage());
+		 	}
 		    System.out.println("----------------");
 		    printMatrix(resultat);
 		
@@ -57,52 +65,113 @@ public class Matrix {
 	}
 	
 	private static void printMatrix (int[][]Matrix) {
-		for (int y = 0; y < Matrix.length; y++) {
-	        for (int x = 0; x < Matrix[y].length; x++) {
-	        	System.out.print(Matrix[y][x] + " ");
-	        }
-	        System.out.print("\n");
-	}
+		try {
+			for (int y = 0; y < Matrix.length; y++) {
+				try {
+			        for (int x = 0; x < Matrix[y].length; x++) {
+			        	System.out.print(Matrix[y][x] + " ");
+			        }
+			    }catch (ArrayIndexOutOfBoundsException e) {
+			    	System.err.println("Indice x invalide " + e.getMessage());
+			    }
+		        System.out.print("\n");
+				}
+			}catch (ArrayIndexOutOfBoundsException exception) {
+				System.err.println("Indice y invalid : " + exception.getMessage());
+			}
 	}
 
 	private static void addMatrix(int[][] firstMatrix, int[][] secondMatrix) {
-		if (firstMatrix.length == secondMatrix.length && firstMatrix[0].length == secondMatrix[0].length) {
-			 int[][] resultat = new int[firstMatrix.length][firstMatrix[0].length];
-			 	printMatrix(firstMatrix);
-			 	System.out.println("+");
-			 	printMatrix(secondMatrix);
-			    for (int y = 0; y < firstMatrix.length; y++) {
-			        for (int x = 0; x < firstMatrix[y].length; x++) {
-			            resultat[y][x] =
-			                firstMatrix[y][x] + secondMatrix[y][x];
-			        }
-			    }
-			    System.out.println("----------------");
-			    printMatrix(resultat);
-			    
-		}else {
-			System.out.println("Les Matrices non pas la meme taille");
-		}
+
+	    if (firstMatrix.length == secondMatrix.length
+	            && firstMatrix[0].length == secondMatrix[0].length) {
+
+	        int[][] resultat =
+	                new int[firstMatrix.length][firstMatrix[0].length];
+
+	        printMatrix(firstMatrix);
+	        System.out.println("+");
+	        printMatrix(secondMatrix);
+
+	        try {
+	            for (int y = 0; y < firstMatrix.length; y++) {
+
+	                try {
+	                    for (int x = 0; x < firstMatrix[y].length; x++) {
+
+	                        resultat[y][x] =
+	                                firstMatrix[y][x] + secondMatrix[y][x];
+	                    }
+
+	                } catch (ArrayIndexOutOfBoundsException exception) {
+	                    System.err.println(
+	                            "Indice x invalide : "
+	                                    + exception.getMessage()
+	                    );
+	                }
+	            }
+
+	        } catch (ArrayIndexOutOfBoundsException exception) {
+	            System.err.println(
+	                    "Indice y invalide : "
+	                            + exception.getMessage()
+	            );
+	        }
+
+	        System.out.println("----------------");
+	        printMatrix(resultat);
+
+	    } else {
+	        System.err.println(
+	                "Les matrices n'ont pas la même taille."
+	        );
+	    }
 	}
 	
 	private static void subMatrix(int[][] firstMatrix, int[][] thirdMatrix) {
-		if (firstMatrix.length == thirdMatrix.length && firstMatrix[0].length == thirdMatrix[0].length) {
-			 int[][] resultat = new int[firstMatrix.length][firstMatrix[0].length];
-			 printMatrix(firstMatrix);
-			 	System.out.println("-");
-			 	printMatrix(thirdMatrix);
-			    for (int y = 0; y < firstMatrix.length; y++) {
-			        for (int x = 0; x < firstMatrix[y].length; x++) {
-			            resultat[y][x] =
-			                firstMatrix[y][x] - thirdMatrix[y][x];
-			        }
-			    }
-			    System.out.println("----------------");
-			    printMatrix(resultat);
-		}else {
-			System.out.println("Les Matrices non pas la meme taille");
-		}
-			
 
-}
+	    if (firstMatrix.length == thirdMatrix.length
+	            && firstMatrix[0].length == thirdMatrix[0].length) {
+
+	        int[][] resultat =
+	                new int[firstMatrix.length][firstMatrix[0].length];
+
+	        printMatrix(firstMatrix);
+	        System.out.println("-");
+	        printMatrix(thirdMatrix);
+
+	        try {
+	            for (int y = 0; y < firstMatrix.length; y++) {
+
+	                try {
+	                    for (int x = 0; x < firstMatrix[y].length; x++) {
+
+	                        resultat[y][x] =
+	                                firstMatrix[y][x] - thirdMatrix[y][x];
+	                    }
+
+	                } catch (ArrayIndexOutOfBoundsException exception) {
+	                    System.err.println(
+	                            "Indice x invalide : "
+	                                    + exception.getMessage()
+	                    );
+	                }
+	            }
+
+	        } catch (ArrayIndexOutOfBoundsException exception) {
+	            System.err.println(
+	                    "Indice y invalide : "
+	                            + exception.getMessage()
+	            );
+	        }
+
+	        System.out.println("----------------");
+	        printMatrix(resultat);
+
+	    } else {
+	        System.err.println(
+	                "Les matrices n'ont pas la même taille."
+	        );
+	    }
+	}
 }
